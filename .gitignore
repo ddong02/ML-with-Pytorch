@@ -1,1 +1,5 @@
 .DS_Store
+chapter11/__pycache__/NeuralNetMLP.cpython-39.pyc
+chapter11/train.py
+chapter11/data/mnist_data_X.npy
+chapter11/data/mnist_target_y.npy

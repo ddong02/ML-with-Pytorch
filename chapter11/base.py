@@ -1,9 +1,8 @@
-from sklearn.datasets import fetch_openml
+import numpy as np
 from sklearn.model_selection import train_test_split
 
-X, y = fetch_openml('mnist_784', version=1, return_X_y=True)
-X = X.values
-y = y.astype(int).values
+X = np.load('mnist_data_X.npy')
+y = np.load('mnist_target_y.npy')
 
 X = ((X / 255.) - 0.5) * 2
 
