@@ -64,7 +64,23 @@ def train(model, X_train, y_train, X_valid, y_valid, num_epochs,
                model.weight_out -= learning_rate * d_loss__d_w_out
                model.bias_out -= learning_rate * d_loss__d_b_out
           
-          # train_mse, train_acc = 
+          train_mse, train_acc = compute_mse_and_acc(
+               model, X_train, y_train
+          )
+          valid_mse, valid_acc = compute_mse_and_acc(
+               model, X_valid, y_valid
+          )
+          train_acc, valid_acc = train_acc*100, valid_acc*100
+          epoch_train_acc.append(train_acc)
+          epoch_valid_acc.append(valid_acc)
+          epoch_loss.append(train_mse)
+
+          print(f'Epoch: {e+1:03d}/{num_epochs:03d}'
+                f'| Train MSE: {train_mse:.2f} '
+                f'| Train Acc: {train_acc:.2f}% '
+                f'| Valid Acc: {valid_acc:.2f}%')
+          
+     return epoch_loss, epoch_train_acc, epoch_valid_acc
 
 
 if __name__ == '__main__':
@@ -85,6 +101,7 @@ if __name__ == '__main__':
      random_state=123, stratify=y_temp
      )
 
-     mse, acc = compute_mse_and_acc(model, X_valid, y_valid)
-     print(f'Validation Set MSE: {mse:.1f}')
-     print(f'Validation Set Accuracy: {acc*100:.1f}%')
+     np.random.seed(123)
+     epoch_loss, epoch_train_acc, epoch_valid_acc = train(
+          model, X_train, y_train, X_valid, y_valid, 50, 0.1
+     )
