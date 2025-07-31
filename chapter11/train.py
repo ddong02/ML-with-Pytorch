@@ -1,4 +1,6 @@
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 
 from NeuralNetMLP import NeuralNetMLP
@@ -102,6 +104,45 @@ if __name__ == '__main__':
      )
 
      np.random.seed(123)
+     epochs = 50
+     learning_rate = 0.1
      epoch_loss, epoch_train_acc, epoch_valid_acc = train(
-          model, X_train, y_train, X_valid, y_valid, 50, 0.1
+          model, X_train, y_train, X_valid, y_valid, epochs, learning_rate
      )
+     
+     loss_acc_df = pd.DataFrame({
+          'epoch_loss': epoch_loss,
+          'epoch_train_acc': epoch_train_acc,
+          'epoch_valid_acc': epoch_valid_acc
+     })
+     
+     file_path = './train_result/loss_acc_result_no_index.csv'
+     loss_acc_df.to_csv(file_path, index=False)
+     
+     test_mse, test_acc = compute_mse_and_acc(model, X_test, y_test)
+     print(f'Test Accuracy: {test_acc*100: .2f}%')
+     
+     X_test_subset = X_test[:1000, :]
+     y_test_subset = y_test[:1000]
+     _, probas = model.forward(X_test_subset)
+     test_pred = np.argmax(probas, axis=1)
+     
+     misclassified_image = \
+          X_test_subset[y_test_subset != test_pred][:25]
+     misclassified_labels = test_pred[y_test_subset != test_pred][:25]
+     correct_labels = y_test_subset[y_test_subset != test_pred][:25]
+     
+     fig, ax = plt.subplots(nrows=5, ncols=5,
+                            sharex=True, sharey=True,
+                            figsize=(8, 8))
+     ax = ax.flatten()
+     for i in range(25):
+          img = misclassified_image[i].reshape(28, 28)
+          ax[i].imshow(img, cmap='Greys', interpolation='nearest')
+          ax[i].set_title(f'{i+1})' 
+                          f'True: {correct_labels[i]}\n'
+                          f'Predicted: {misclassified_labels[i]}')
+     ax[0].set_xticks([])
+     ax[0].set_yticks([])
+     plt.tight_layout()
+     plt.show()
