@@ -3,3 +3,6 @@ chapter11/__pycache__/NeuralNetMLP.cpython-39.pyc
 chapter11/data/mnist_data_X.npy
 chapter11/data/mnist_target_y.npy
 chapter11/train_result/loss_acc_result_no_index.csv
+chapter12/celeba/
+chapter12/cat_dog_images/
+chapter12/MNIST/
