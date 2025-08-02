@@ -6,3 +6,5 @@ chapter11/train_result/loss_acc_result_no_index.csv
 chapter12/celeba/
 chapter12/cat_dog_images/
 chapter12/MNIST/
+chapter12/iris_classifier_state_dict.pt
+chapter12/iris_classifier.pt
