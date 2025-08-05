@@ -8,3 +8,5 @@ chapter12/cat_dog_images/
 chapter12/MNIST/
 chapter12/iris_classifier_state_dict.pt
 chapter12/iris_classifier.pt
+chapter13/MNIST/
+chapter13/lightning_logs/
