@@ -10,3 +10,6 @@ chapter12/iris_classifier_state_dict.pt
 chapter12/iris_classifier.pt
 chapter13/MNIST/
 chapter13/lightning_logs/
+chapter13/checkpoints/
+chapter13/final_combined_metrics_plot.png
+chapter13/runs/
