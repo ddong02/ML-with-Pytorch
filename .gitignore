@@ -17,3 +17,6 @@ chapter14/MNIST/
 chapter14/model_state_dict.pth
 chapter14/example-image.png
 chapter14/saved_model.pth
+celebA_classification/celeba/
+celebA_classification/best_model.pth
+celebA_classification/Metric_plot.png
